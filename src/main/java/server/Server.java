@@ -1,10 +1,9 @@
 package main.java.server;
 
 import javafx.util.Pair;
+import main.java.server.models.*;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -129,8 +128,23 @@ public class Server {
      @param arg la session pour laquelle on veut récupérer la liste des cours
      */
     public void handleLoadCourses(String arg) {
-        // TODO: implémenter cette méthode
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("src/main.java.server/data/cours.txt"));
+            ArrayList<Course> courseList = new ArrayList<>();
+            String line;
 
+            while((line = reader.readLine()) != null) {
+                String[] parts = line.split("\t");
+                if(parts[2].equals(arg)){
+                    courseList.add(new Course(parts[1], parts[0], parts[2]));
+                }
+            }
+            objectOutputStream.writeObject(courseList);
+            reader.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -139,7 +153,20 @@ public class Server {
      La méthode gére les exceptions si une erreur se produit lors de la lecture de l'objet, l'écriture dans un fichier ou dans le flux de sortie.
      */
     public void handleRegistration() {
-        // TODO: implémenter cette méthode
+        try {
+            RegistrationForm form = (RegistrationForm) objectInputStream.readObject();
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src/main.java.server/data/inscription.txt"));
+            Course course = form.getCourse();
+            String s = course.getSession() + "\t" + course.getCode() + "\t" + form.getMatricule() + "\t" +
+                    form.getPrenom() + "\t" + form.getNom() + "\t" + form.getEmail() + "\n";
+            writer.append(s);
+            writer.close();
+            objectOutputStream.writeChars("Votre insciption a été enregistrée.");
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 
