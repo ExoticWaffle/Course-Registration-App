@@ -129,7 +129,7 @@ public class Server {
      */
     public void handleLoadCourses(String arg) {
         try{
-            BufferedReader reader = new BufferedReader(new FileReader("src/main.java.server/data/cours.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("src/main/java/server/data/cours.txt"));
             ArrayList<Course> courseList = new ArrayList<>();
             String line;
 
@@ -139,7 +139,8 @@ public class Server {
                     courseList.add(new Course(parts[1], parts[0], parts[2]));
                 }
             }
-            objectOutputStream.writeObject(courseList);
+            Course[] courses = courseList.toArray(new Course[courseList.size()]);
+            objectOutputStream.writeObject(courses);
             reader.close();
         }
         catch (IOException e){
@@ -156,13 +157,13 @@ public class Server {
         try {
             RegistrationForm form = (RegistrationForm) objectInputStream.readObject();
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src/main.java.server/data/inscription.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/java/server/data/inscription.txt", true));
             Course course = form.getCourse();
-            String s = course.getSession() + "\t" + course.getCode() + "\t" + form.getMatricule() + "\t" +
-                    form.getPrenom() + "\t" + form.getNom() + "\t" + form.getEmail() + "\n";
+            String s = "\n" + course.getSession() + "\t" + course.getCode() + "\t" + form.getMatricule() + "\t" +
+                    form.getPrenom() + "\t" + form.getNom() + "\t" + form.getEmail();
             writer.append(s);
             writer.close();
-            objectOutputStream.writeChars("Votre insciption a été enregistrée.");
+            objectOutputStream.writeObject("Félicitations! Inscription réussie de "+ form.getPrenom() +" au cours "+ course.getCode() +".");
         }
         catch(Exception e) {
             e.printStackTrace();
