@@ -1,5 +1,7 @@
 package main.java.client;
 
+import main.java.client.UI.*;
+
 import java.io.IOException;
 
 public class ClientLauncher {

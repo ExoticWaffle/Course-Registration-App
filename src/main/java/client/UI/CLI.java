@@ -1,5 +1,6 @@
-package main.java.client;
+package main.java.client.UI;
 
+import main.java.client.Client;
 import main.java.server.models.Course;
 import main.java.server.models.RegistrationForm;
 
@@ -8,7 +9,7 @@ import java.util.Scanner;
 
 public class CLI {
 
-    private Client client;
+    private final Client client;
     public CLI(String ip, int port) throws IOException {
         client = new Client(ip, port);
     }
