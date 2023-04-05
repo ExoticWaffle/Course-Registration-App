@@ -1,1 +1,3 @@
 Automne	IFT2255	12345678	Michalis	Famelis	mfamelis@iro.umontreal.ca
+
+Hiver	IFT2125	20247961	Leo	A	leo@tre.com
