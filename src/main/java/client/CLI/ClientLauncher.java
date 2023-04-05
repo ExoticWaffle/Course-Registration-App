@@ -1,6 +1,4 @@
-package main.java.client;
-
-import main.java.client.UI.*;
+package main.java.client.CLI;
 
 import java.io.IOException;
 

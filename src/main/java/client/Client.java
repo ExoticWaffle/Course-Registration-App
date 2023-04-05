@@ -38,8 +38,33 @@ public class Client {
         return courses;
     }
 
-    public String sendRegistration(RegistrationForm form){
+    public String sendRegistration(String firstName, String lastName, String email, String matricule, Course course){
         String msg = "";
+
+        //prenom, nom, email validation
+        if(firstName.equals("") || lastName.equals("") || email.equals("")) {
+            return "Veuillez remplir tous les champs.";
+        }
+
+        //matricule validation
+        msg = "Votre matricule doit être composé de 8 chiffres.";
+        try{
+            int matInt = Integer.parseInt(matricule);
+        }
+        catch(NumberFormatException e){
+            return msg;
+        }
+        if(matricule.length() != 8){
+            return msg;
+        }
+
+        //course validation
+        if(course == null){
+            return "Veuillez choisir un cours valide.";
+        }
+
+        //send form
+        RegistrationForm form = new RegistrationForm(firstName, lastName, email, matricule, course);
         try{
             startConnection();
             out.writeObject("INSCRIRE " + form.getCourse().getCode());
@@ -51,6 +76,15 @@ public class Client {
             msg = "Erreur. Votre requête n'a pas été effectué.";
         }
         return msg;
+    }
+
+    public Course getCourse(String code, Course[] courses){
+        for(Course c : courses) {
+            if (code.equals(c.getCode())) {
+                return c;
+            }
+        }
+        return null;
     }
 
     private void startConnection() throws IOException{

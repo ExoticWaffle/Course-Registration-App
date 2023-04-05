@@ -1,8 +1,7 @@
-package main.java.client.UI;
+package main.java.client.CLI;
 
 import main.java.client.Client;
 import main.java.server.models.Course;
-import main.java.server.models.RegistrationForm;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -35,32 +34,25 @@ public class CLI {
                 continue;
             }
 
-            System.out.print("Veuillez saisir votre prénom: ");
-            String firstName = reader.next();
-            System.out.print("Veuillez saisir votre nom: ");
-            String lastName = reader.next();
-            System.out.print("Veuillez saisir votre email: ");
-            String email = reader.next();
-            System.out.print("Veuillez saisir votre matricule: ");
-            String matricule = reader.next();
-
-            Course course = new Course("", "", "");
+            String msg;
             while(true){
+                System.out.print("Veuillez saisir votre prénom: ");
+                String firstName = reader.next();
+                System.out.print("Veuillez saisir votre nom: ");
+                String lastName = reader.next();
+                System.out.print("Veuillez saisir votre email: ");
+                String email = reader.next();
+                System.out.print("Veuillez saisir votre matricule: ");
+                String matricule = reader.next();
                 System.out.print("Veuillez saisir le code du cours: ");
                 String courseCode = reader.next();
-                for(Course c : courses) {
-                    if (courseCode.equals(c.getCode())) {
-                        course = c;
-                        break;
-                    }
-                }
-                if(!course.getName().equals("")){
+                msg = client.sendRegistration(firstName, lastName, email, matricule, client.getCourse(courseCode, courses));
+                if(msg.charAt(0) == 'F' || msg.charAt(0) == 'E'){
                     break;
                 }
-                System.out.println(courseCode + " n'est pas un cours valide.");
             }
 
-            System.out.println(client.sendRegistration(new RegistrationForm(firstName, lastName, email, matricule, course)));
+            System.out.println(msg);
             System.out.print("1. Inscription à un autre cours\n2. Quitter\n> Choix: ");
             if(choice() == 2){
                 break;
