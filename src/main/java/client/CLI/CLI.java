@@ -46,13 +46,12 @@ public class CLI {
                 String matricule = reader.next();
                 System.out.print("Veuillez saisir le code du cours: ");
                 String courseCode = reader.next();
-                msg = client.sendRegistration(firstName, lastName, email, matricule, client.getCourse(courseCode, courses));
+                msg = client.sendRegistration(firstName, lastName, email, matricule, getCourse(courseCode, courses));
+                System.out.println(msg);
                 if(msg.charAt(0) == 'F' || msg.charAt(0) == 'E'){
                     break;
                 }
             }
-
-            System.out.println(msg);
             System.out.print("1. Inscription à un autre cours\n2. Quitter\n> Choix: ");
             if(choice() == 2){
                 break;
@@ -93,6 +92,15 @@ public class CLI {
             return false;
         }
         return n > 0 && n <= max;
+    }
+
+    private Course getCourse(String code, Course[] courses){
+        for(Course c : courses) {
+            if (code.equals(c.getCode())) {
+                return c;
+            }
+        }
+        return null;
     }
 
 }

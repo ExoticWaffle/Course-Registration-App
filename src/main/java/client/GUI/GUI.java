@@ -131,7 +131,7 @@ public class GUI extends Application {
         TextField emailField = new TextField();
         TextField matriculeField = new TextField();
 
-        Text feedback = new Text();
+        Text feedback = new Text("Veuillez selectionner un cours affiché dans le tableau");
         feedback.setFont(Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR,12));
         feedback.setWrappingWidth(formPanel.getWidth());
         formPanel.setHalignment(feedback, HPos.CENTER);

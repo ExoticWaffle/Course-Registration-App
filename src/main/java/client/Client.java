@@ -41,9 +41,14 @@ public class Client {
     public String sendRegistration(String firstName, String lastName, String email, String matricule, Course course){
         String msg = "";
 
-        //prenom, nom, email validation
-        if(firstName.equals("") || lastName.equals("") || email.equals("")) {
+        //prenom, nom validation
+        if(firstName.equals("") || lastName.equals("")) {
             return "Veuillez remplir tous les champs.";
+        }
+
+        //email validation
+        if(!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
+            return "Veuillez saisir une adresse email valide.";
         }
 
         //matricule validation
@@ -78,14 +83,7 @@ public class Client {
         return msg;
     }
 
-    public Course getCourse(String code, Course[] courses){
-        for(Course c : courses) {
-            if (code.equals(c.getCode())) {
-                return c;
-            }
-        }
-        return null;
-    }
+
 
     private void startConnection() throws IOException{
         socket = new Socket(ip, port);
