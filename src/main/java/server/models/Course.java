@@ -2,6 +2,9 @@ package main.java.server.models;
 
 import java.io.Serializable;
 
+/**
+ * Object représentant un cours et contient son nom, code et la session dans laquelle le cours se déroule. Implémente l'interface Serializable.
+ */
 public class Course implements Serializable {
 
     private String name;

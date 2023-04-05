@@ -6,13 +6,27 @@ import main.java.server.models.Course;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Le client de ligne de commande.
+ */
 public class CLI {
 
     private final Client client;
+
+    /**
+     * Crée un client selon l'adresse IP et port indiqué.
+     * @param ip l'adresse IP
+     * @param port le port du serveur auquel le client se connecte
+     * @throws IOException
+     */
     public CLI(String ip, int port) throws IOException {
         client = new Client(ip, port);
     }
 
+    /**
+     * Exécute tous les fonctionnalités du client. Prend l'input de l'utilisateur et y affiche des messages, envoie des requêtes au serveur et en reçois des réponses.
+     * @throws IOException
+     */
     public void run() throws IOException{
         Scanner reader = new Scanner(System.in);
         System.out.println("***Bienvenu au portail d'inscription de l'UDEM***");

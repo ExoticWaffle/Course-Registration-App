@@ -9,6 +9,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Un serveur pour le système d'inscription aux cours à UdeM. Il peut accepter des clients et répondre à ses requêtes.
+ */
 public class Server {
 
     /**
@@ -51,8 +54,7 @@ public class Server {
     }
 
     /**
-     *  connecte le client au serveur, répond à ses requêtes, et le déconnecte. Ces trois étapes sont éxécuté de manière
-     *  répétitive. Ce fonction continue de s'executer tant qu'il n y a pas d'erreur.
+     *  connecte le client au serveur, répond à ses requêtes, et le déconnecte. Ces trois étapes sont éxécutée de manière répétitive. Cette fonction continue de s'executer tant qu'il n y a pas d'erreur.
      */
     public void run() {
         while (true) {

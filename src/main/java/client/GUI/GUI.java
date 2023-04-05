@@ -19,11 +19,18 @@ import main.java.server.models.Course;
 
 import java.io.IOException;
 
-
+/**
+ * Le client graphique. Une application JavaFX et hérite de la classe Application.
+ */
 public class GUI extends Application {
 
     private final int PORT = 1337;
 
+    /**
+     * Décris l'interface graphique et contient du code pour gérer des événements.
+     * @param primaryStage La fenêtre où se trouve l'application
+     * @throws IOException
+     */
     @Override
     public void start(Stage primaryStage) throws IOException{
         Client client = new Client("127.0.0.1", 1337);
@@ -173,6 +180,10 @@ public class GUI extends Application {
     }
 
 
+    /**
+     * La méthode main qui démarre le client graphique.
+     * @param args arguments de la ligne de commande
+     */
     public static void main(String[] args){
         launch(args);
     }

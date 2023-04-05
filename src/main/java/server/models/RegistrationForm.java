@@ -2,6 +2,9 @@ package main.java.server.models;
 
 import java.io.Serializable;
 
+/**
+ * Objet représentant un formulaire d'inscription et contient le prénom, nom, email, et la matricule de l'étudiant ainsi que le cours auquel il s'inscrit. Implémente l'interface Serializable.
+ */
 public class RegistrationForm implements Serializable {
     private String prenom;
     private String nom;
