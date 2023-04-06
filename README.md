@@ -1,4 +1,4 @@
-# IFT1025-TP2-server
+# IFT1025-TP2
 ### Quelques consignes sur comment démarrer le projet:
 1. Veuillez garder les fichiers .jar dans le même répertoire (out/artifacts), surtout server.jar, ainsi que les fichiers texte dans out/artifacts/server/src/main/java/server/data
 2. J'ai changé les VM options pour le fichier GUI.java pour que JavaFX marche, et je ne sais pas si ce changement sera transféré automatiquement, alors sinon vous pouvez ajouter --module-path ${PATH_TO_FX} --add-modules javafx.fxml,javafx.controls,javafx.graphics aux VM options, où ${PATH_TO_FX} est le répertoire "lib" du SDK javafx dans votre machine.
